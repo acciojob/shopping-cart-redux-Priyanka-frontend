@@ -38,7 +38,9 @@ export const removeFromWishlist = (id) => ({
   payload: id,
 });
 
-export const applyCoupon = (coupon) => ({
-  type: APPLY_COUPON,
-  payload: coupon,
-});
+export const applyCoupon = (code) => {
+  return {
+    type: "APPLY_COUPON",
+    payload: code ? code.trim().toUpperCase() : "",
+  };
+};

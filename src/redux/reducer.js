@@ -96,28 +96,42 @@ const reducer = (state = initialState, action) => {
         ),
       };
 
-    case APPLY_COUPON:
-      if (action.payload === "SAVE10") {
+    case "APPLY_COUPON": {
+      const code = action.payload;
+
+      // Missing or invalid coupon
+      if (!code) {
         return {
           ...state,
-          coupon: action.payload,
+          coupon: null,
+          discount: 0,
+        };
+      }
+
+      // Valid coupons
+      if (code === "SAVE10") {
+        return {
+          ...state,
+          coupon: code,
           discount: 10,
         };
       }
 
-      if (action.payload === "SAVE20") {
+      if (code === "SAVE20") {
         return {
           ...state,
-          coupon: action.payload,
+          coupon: code,
           discount: 20,
         };
       }
 
+      // Invalid coupon
       return {
         ...state,
-        coupon: "",
+        coupon: null,
         discount: 0,
       };
+    }
 
     default:
       return state;
